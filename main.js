@@ -3,17 +3,17 @@
 var gElImgPick = document.querySelector('.img-pick');
 var gElEditor = document.querySelector('.editor-container');
 var gElMemes = document.querySelector('.saved-memes');
-
 var currImg;
 
 function init() {
     renderImages();
+    // initDragAndDrop();
 }
 
 function renderImages() {
     var elGrid = document.querySelector('.img-grid');
     var strHtml = '';
-    var memes = getGMemes()
+    var memes = getGMemes();
     memes.map((img) => {
         var str = `<img class="img-${img.id}" onclick="onLoadPng(${img.id})" src="${img.url}">`
         strHtml += str;
@@ -28,6 +28,7 @@ function onLoadPng(img) {
     gElEditor.style.display = 'block';
     drawImg(elImg);
     drawText(img);
+    drawSecondText();
 }
 
 function onChangeText(ev) {
@@ -38,7 +39,7 @@ function onChangeText(ev) {
 }
 
 function draw(ev) {
-    console.log('ev:', ev)
+    // console.log('ev:', ev)
 }
 
 function renderCanvas() {
@@ -46,6 +47,7 @@ function renderCanvas() {
     gCtx.fillRect(0, 0, gElCanvas.width, gElCanvas.height)
     drawImg(currImg);
     drawText(gCurrMemeId);
+    drawSecondText()
 }
 
 function onMoveUp() {
@@ -69,7 +71,7 @@ function onDecreaseFont() {
 }
 
 function onSwitchLine() {
-    var elText = document.querySelector('input[name="txt"]');
+    // var elText = document.querySelector('input[name="txt"]');
     switchLine();
     renderCanvas();
 }
@@ -93,9 +95,10 @@ function renderSavedImg() {
     img.onload = () => {
         gCtx.drawImage(img, 0, 0);
     };
-    var up = new Image();
-    var down = new Image();
-    up.src = `${img}/up.png`;
-    down.src = `${img}/down.png`;
-    elSavedMemes.appendChild(img)
+    console.log('img:', img)
+        // gSavedMemes.push(img);
+    var savedMemes = getGSavedMemes();
+    savedMemes.map((img) => {
+        return elSavedMemes.appendChild(img);
+    })
 }

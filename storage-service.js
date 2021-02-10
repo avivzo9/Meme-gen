@@ -1,7 +1,9 @@
 'use strict';
 
 function saveToStorage(key, val) {
-    localStorage.setItem(key, val.toDataURL());
+    val.map((meme) => {
+        localStorage.setItem(key, meme.toDataURL());
+    })
 }
 
 function loadFromStorage(key) {

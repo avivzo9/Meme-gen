@@ -87,6 +87,11 @@ a {
     height: 61px;
 }
 
+.selected {
+    color: red;
+    background-color: red;
+}
+
 
 /* img grid */
 
