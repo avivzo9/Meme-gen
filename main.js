@@ -67,6 +67,7 @@ function onDecreaseFont() {
 }
 
 function onSwitchLine() {
+    var elText = document.querySelector('input[name="txt"]');
     switchLine();
-
+    renderCanvas();
 }

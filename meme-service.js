@@ -6,7 +6,8 @@ var gCurrMemeId = 1
 var gX = 110;
 var gY = 65;
 var gSize = 50;
-
+var gLine = 0;
+var gCount = 0;
 
 var gElCanvas = document.querySelector('.canvas');
 var gCtx = gElCanvas.getContext('2d');
@@ -90,7 +91,7 @@ function drawText(imgIdx) {
 
 
 function changeText(txt) {
-    gMeme.lines[0].txt = txt;
+    gMeme.lines[gLine].txt = txt;
 }
 
 function getElCanvas() {
@@ -126,5 +127,11 @@ function decreaseFont() {
 }
 
 function switchLine() {
-
+    if (gCount === 0) {
+        gLine++
+        gCount--
+    } else {
+        gLine--
+        gCount++
+    }
 }
