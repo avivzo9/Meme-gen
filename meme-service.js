@@ -16,11 +16,10 @@ var gImgs = [
     { id: 0, url: 'img/1.jpg', keywords: ['donald trump'], lines: 2 },
     { id: 1, url: 'img/2.jpg', keywords: ['dog'], lines: 2 },
     { id: 2, url: 'img/3.jpg', keywords: ['dog', 'animal', 'baby'], lines: 2 },
-    { id: 3, url: 'img/4.jpg', keywords: ['cat', 'animal'], lines: 1 },
-    { id: 4, url: 'img/5.jpg', keywords: ['baby', 'happy'], lines: 1 },
-    { id: 5, url: 'img/6.jpg', keywords: ['carzy', 'sarcastic'], lines: 3 }
+    { id: 3, url: 'img/4.jpg', keywords: ['cat', 'animal'], lines: 2 },
+    { id: 4, url: 'img/5.jpg', keywords: ['baby', 'happy'], lines: 2 },
+    { id: 5, url: 'img/6.jpg', keywords: ['carzy', 'sarcastic'], lines: 2 }
 ];
-
 var gMeme = {
     selectedImgId: 1,
     selectedLineIdx: gImgs[gCurrMemeId].lines,
@@ -216,4 +215,16 @@ function changeTextColor(color) {
 
 function changeFont(font) {
     gMeme.lines[0].font = font;
+}
+
+function addTextLine() {
+    if (gImgs[gCurrMemeId].lines > 2) return;
+    else gImgs[gCurrMemeId].lines++;
+    console.log('gImgs[gCurrMemeId].lines:', gImgs[gCurrMemeId].lines)
+}
+
+function deleteTextLine() {
+    if (gImgs[gCurrMemeId].lines === 1) return;
+    else gImgs[gCurrMemeId].lines--;
+    console.log('gImgs[gCurrMemeId].lines:', gImgs[gCurrMemeId].lines)
 }

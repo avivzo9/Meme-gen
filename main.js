@@ -120,3 +120,13 @@ function onFontChange(font) {
     changeFont(font);
     renderCanvas();
 }
+
+function onAddTextLine() {
+    addTextLine();
+    renderCanvas();
+}
+
+function onDeleteTextLine() {
+    deleteTextLine();
+    renderCanvas();
+}
