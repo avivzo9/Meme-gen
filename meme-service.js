@@ -2,7 +2,7 @@
 
 
 var gMemes;
-
+var gCurrMemeId;
 
 var gElCanvas = document.querySelector('.canvas');
 var gCtx = gElCanvas.getContext('2d');
@@ -33,18 +33,34 @@ var gMeme = {
             align: 'left',
             color: 'red'
         },
-
-
-
-
+        {
+            txt: 'Baby & Dog',
+            size: 20,
+            align: 'left',
+            color: 'red'
+        },
+        {
+            txt: 'Cute Cat',
+            size: 20,
+            align: 'left',
+            color: 'red'
+        },
+        {
+            txt: 'Baby is right',
+            size: 20,
+            align: 'left',
+            color: 'red'
+        },
+        {
+            txt: 'Crazy man',
+            size: 20,
+            align: 'left',
+            color: 'red'
+        },
     ]
 }
 
 _createMemes()
-
-function _getText() {
-
-}
 
 function _createMemes() {
     var memes = gImgs.map((img) => {
@@ -58,14 +74,22 @@ function drawImg(elImg) {
 }
 
 function drawText(imgIdx) {
+    console.log('imgIdx:', imgIdx)
+    gCurrMemeId = imgIdx;
+    imgIdx--
     gCtx.beginPath();
     gCtx.lineWidth = 2;
     gCtx.fillStyle = 'white';
     gCtx.fill();
     gCtx.strokeStyle = 'black';
     gCtx.font = '40px IMPACT'
-    gCtx.fillText(gMeme.lines[0].txt, 78, 50);
-    gCtx.strokeText(gMeme.lines[0].txt, 78, 50);
+    gCtx.fillText(gMeme.lines[gCurrMemeId].txt, 78, 50);
+    gCtx.strokeText(gMeme.lines[gCurrMemeId].txt, 78, 50);
+}
+
+function changeText(txt) {
+    console.log('gCurrMemeId:', gCurrMemeId)
+    gMeme.lines[gCurrMemeId].txt = txt;
 }
 
 function getElCanvas() {

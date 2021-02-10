@@ -2,16 +2,17 @@
 
 var gImgPick = document.querySelector('.img-pick')
 var gEditor = document.querySelector('.editor-container')
+var currImg;
 
 function init() {
-    renderImg();
+    renderImages();
 }
 
-function renderImg() {
+function renderImages() {
     var elGrid = document.querySelector('.img-grid');
     var strHtml = '';
     var memes = getGMemes()
-    var newStr = memes.map((img) => {
+    memes.map((img) => {
         var str = `<img class="img-${img.id}" onclick="onLoadPng(${img.id})" src="${img.url}">`
         strHtml += str;
     }).join('');
@@ -19,8 +20,8 @@ function renderImg() {
 }
 
 function onLoadPng(img) {
-    console.log('img:', img)
-    var elImg = document.querySelector(`.img-${img}`)
+    var elImg = document.querySelector(`.img-${img}`);
+    currImg = elImg;
     gImgPick.style.display = 'none';
     gEditor.style.display = 'block';
     drawImg(elImg);
@@ -30,10 +31,17 @@ function onLoadPng(img) {
 function onDrawText(ev) {
     ev.preventDefault();
     var elText = document.querySelector('input[name="txt"]');
-    // drawText(elText.value);
+    changeText(elText.value);
+    renderCanvas();
 }
 
 function draw(ev) {
     console.log('ev:', ev)
+}
 
+function renderCanvas() {
+    gCtx.fillStyle = "white"
+    gCtx.fillRect(0, 0, gElCanvas.width, gElCanvas.height)
+    drawImg(currImg);
+    drawText(gCurrMemeId);
 }
