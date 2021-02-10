@@ -28,7 +28,7 @@ function onLoadPng(img) {
     drawText(img);
 }
 
-function onDrawText(ev) {
+function onChangeText(ev) {
     ev.preventDefault();
     var elText = document.querySelector('input[name="txt"]');
     changeText(elText.value);
@@ -44,4 +44,29 @@ function renderCanvas() {
     gCtx.fillRect(0, 0, gElCanvas.width, gElCanvas.height)
     drawImg(currImg);
     drawText(gCurrMemeId);
+}
+
+function onMoveUp() {
+    moveUp();
+    renderCanvas();
+}
+
+function onMoveDown() {
+    moveDown();
+    renderCanvas();
+}
+
+function onIncreaseFont() {
+    increaseFont();
+    renderCanvas();
+}
+
+function onDecreaseFont() {
+    decreaseFont();
+    renderCanvas();
+}
+
+function onSwitchLine() {
+    switchLine();
+
 }

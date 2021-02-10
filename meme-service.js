@@ -2,7 +2,11 @@
 
 
 var gMemes;
-var gCurrMemeId;
+var gCurrMemeId = 1
+var gX = 110;
+var gY = 65;
+var gSize = 50;
+
 
 var gElCanvas = document.querySelector('.canvas');
 var gCtx = gElCanvas.getContext('2d');
@@ -10,55 +14,32 @@ var gCtx = gElCanvas.getContext('2d');
 var gKeywords = { 'happy': 5, 'dog': [2, 3], 'donald trump': 1, 'animal': [3, 4], 'baby': [3, 5], 'sarcastic': 6, 'crazy': 6 }
 
 var gImgs = [
-    { id: 1, url: 'img/1.jpg', keywords: ['donald trump'] },
-    { id: 2, url: 'img/2.jpg', keywords: ['dog'] },
-    { id: 3, url: 'img/3.jpg', keywords: ['dog', 'animal', 'baby'] },
-    { id: 4, url: 'img/4.jpg', keywords: ['cat', 'animal'] },
-    { id: 5, url: 'img/5.jpg', keywords: ['baby', 'happy'] },
-    { id: 6, url: 'img/6.jpg', keywords: ['carzy', 'sarcastic'] }
+    { id: 0, url: 'img/1.jpg', keywords: ['donald trump'], lines: 2 },
+    { id: 1, url: 'img/2.jpg', keywords: ['dog'], lines: 2 },
+    { id: 2, url: 'img/3.jpg', keywords: ['dog', 'animal', 'baby'], lines: 2 },
+    { id: 3, url: 'img/4.jpg', keywords: ['cat', 'animal'], lines: 1 },
+    { id: 4, url: 'img/5.jpg', keywords: ['baby', 'happy'], lines: 1 },
+    { id: 5, url: 'img/6.jpg', keywords: ['carzy', 'sarcastic'], lines: 2 }
 ];
 
 var gMeme = {
-    selectedImgId: 5,
-    selectedLineIdx: 0,
+    selectedImgId: 1,
+    selectedLineIdx: gImgs[gCurrMemeId].lines,
     lines: [{
-            txt: 'Donald Trump',
-            size: 20,
+            txt: 'Type something',
+            size: gSize,
             align: 'left',
             color: 'red'
         },
         {
-            txt: 'Cute dogs',
-            size: 20,
+            txt: 'Type another thing',
+            size: gSize,
             align: 'left',
             color: 'red'
-        },
-        {
-            txt: 'Baby & Dog',
-            size: 20,
-            align: 'left',
-            color: 'red'
-        },
-        {
-            txt: 'Cute Cat',
-            size: 20,
-            align: 'left',
-            color: 'red'
-        },
-        {
-            txt: 'Baby is right',
-            size: 20,
-            align: 'left',
-            color: 'red'
-        },
-        {
-            txt: 'Crazy man',
-            size: 20,
-            align: 'left',
-            color: 'red'
-        },
+        }
     ]
 }
+
 
 _createMemes()
 
@@ -75,20 +56,41 @@ function drawImg(elImg) {
 
 function drawText(imgIdx) {
     gCurrMemeId = imgIdx;
-    imgIdx--
+    gMeme.selectedImgId = gCurrMemeId;
+    gMeme.selectedLineIdx = gImgs[gCurrMemeId].lines;
     gCtx.beginPath();
     gCtx.lineWidth = 2;
     gCtx.fillStyle = 'white';
     gCtx.fill();
     gCtx.strokeStyle = 'black';
-    gCtx.font = '40px IMPACT'
-    gCtx.fillText(gMeme.lines[gCurrMemeId].txt, 78, 50);
-    gCtx.strokeText(gMeme.lines[gCurrMemeId].txt, 78, 50);
+    gCtx.font = `${gSize}px IMPACT`;
+    gCtx.fillText(gMeme.lines[0].txt, gX, gY);
+    gCtx.strokeText(gMeme.lines[0].txt, gX, gY);
+    if (gMeme.selectedLineIdx > 1) {
+        gCtx.beginPath();
+        gCtx.lineWidth = 2;
+        gCtx.fillStyle = 'white';
+        gCtx.fill();
+        gCtx.strokeStyle = 'black';
+        gCtx.font = `${gSize}px IMPACT`;
+        gCtx.fillText(gMeme.lines[1].txt, gX - 30, gY + 450);
+        gCtx.strokeText(gMeme.lines[1].txt, gX - 30, gY + 450);
+        if (gMeme.selectedLineIdx > 2) {
+            gCtx.beginPath();
+            gCtx.lineWidth = 2;
+            gCtx.fillStyle = 'white';
+            gCtx.fill();
+            gCtx.strokeStyle = 'black';
+            gCtx.font = `${gSize}px IMPACT`;
+            gCtx.fillText(gMeme.lines[1].txt, gX - 30, gY + 250);
+            gCtx.strokeText(gMeme.lines[1].txt, gX - 30, gY + 250);
+        }
+    }
 }
 
+
 function changeText(txt) {
-    console.log('gCurrMemeId:', gCurrMemeId)
-    gMeme.lines[gCurrMemeId].txt = txt;
+    gMeme.lines[0].txt = txt;
 }
 
 function getElCanvas() {
@@ -103,4 +105,26 @@ function getImgById(ImgId) {
     return gMemes.find((img) => {
         return ImgId === img.id;
     })
+}
+
+function moveUp() {
+    gY -= 10;
+    console.log('gY:', gY)
+}
+
+function moveDown() {
+    gY += 10;
+    console.log('gY:', gY)
+}
+
+function increaseFont() {
+    gSize += 5;
+}
+
+function decreaseFont() {
+    gSize -= 5;
+}
+
+function switchLine() {
+
 }

@@ -58,11 +58,15 @@
             <div class="editor second-container flex">
                 <canvas class="canvas flex" onclick="draw(event)" width="550" height="550"></canvas>
                 <div class="canvas-editor flex">
-                    <form class="text" onsubmit="onDrawText(event)">
+                    <form class="text" onsubmit="onChangeText(event)">
                         <input type="text" placeholder="Text" name="txt">
                         <button>save</button>
                     </form>
-                    <button class="edit-btn"></button>
+                    <button class="edit-btn" onclick="onMoveUp()">move up</button>
+                    <button class="edit-btn" onclick="onMoveDown()">move down</button>
+                    <button class="edit-btn" onclick="onIncreaseFont()">increase font</button>
+                    <button class="edit-btn" onclick="onDecreaseFont()">decrease font</button>
+                    <button class="edit-btn" onclick="onSwitchLine()">Switch Text</button>
                 </div>
             </div>
         </div>
