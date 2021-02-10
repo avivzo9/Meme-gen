@@ -29,6 +29,7 @@ function onLoadPng(img) {
     drawImg(elImg);
     drawText(img);
     drawSecondText();
+    drawText3();
 }
 
 function onChangeText(ev) {
@@ -36,6 +37,7 @@ function onChangeText(ev) {
     var elText = document.querySelector('input[name="txt"]');
     changeText(elText.value);
     renderCanvas();
+    elText.value = '';
 }
 
 function draw(ev) {
@@ -47,7 +49,8 @@ function renderCanvas() {
     gCtx.fillRect(0, 0, gElCanvas.width, gElCanvas.height)
     drawImg(currImg);
     drawText(gCurrMemeId);
-    drawSecondText()
+    drawSecondText();
+    drawText3();
 }
 
 function onMoveUp() {
@@ -83,6 +86,11 @@ function onMemesShow() {
     renderSavedImg();
 }
 
+function onGalleryView() {
+    gElMemes.style.display = 'none';
+    gElImgPick.style.display = 'block';
+}
+
 function onDownloadCanvas(elLink) {
     downLoadCanvas(elLink);
 }
@@ -95,10 +103,20 @@ function renderSavedImg() {
     img.onload = () => {
         gCtx.drawImage(img, 0, 0);
     };
-    console.log('img:', img)
-        // gSavedMemes.push(img);
+    // gSavedMemes.push(img);
     var savedMemes = getGSavedMemes();
     savedMemes.map((img) => {
         return elSavedMemes.appendChild(img);
     })
+}
+
+function onTxtColorChange() {
+    var elColor = document.querySelector('input[name="txt-color"]');
+    changeTextColor(elColor.value);
+    renderCanvas();
+}
+
+function onFontChange(font) {
+    changeFont(font);
+    renderCanvas();
 }

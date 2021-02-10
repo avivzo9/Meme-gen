@@ -15,9 +15,9 @@
         <header class="header flex second-container">
             <img class="logo flex" src="img/LOGO.png">
             <ul class="nav-container flex">
-                <li><a href="#">Gallery</a></li>
+                <li><a href="#" onclick="onGalleryView()">Gallery</a></li>
                 <li><a href="#" onclick="onMemesShow()">Memes</a></li>
-                <li><a href="#">About</a></li>
+                <li><a href="##about">About</a></li>
             </ul>
         </header>
     </section>
@@ -63,10 +63,15 @@
                         <input type="text" placeholder="Text" name="txt">
                         <button>save</button>
                     </form>
+                    <input type="color" class="edit-btn" name="txt-color" onchange="onTxtColorChange()">
                     <button class="edit-btn" onclick="onMoveUp()">move up</button>
                     <button class="edit-btn" onclick="onMoveDown()">move down</button>
                     <button class="edit-btn" onclick="onIncreaseFont()">increase font</button>
                     <button class="edit-btn" onclick="onDecreaseFont()">decrease font</button>
+                    <select onchange="onFontChange(this.value)">
+                        <option class="impact">Impact</option>
+                        <option class="ariel">Ariel</option>
+                    </select>
                     <button class="edit-btn" onclick="onSwitchLine()">Switch Text</button>
                     <button class="edit-btn" onclick="saveAndRestore()">Save</button>
                     <a href="#" class="edit-btn" onclick="onDownloadCanvas(this)" download="">Download meme</a>
@@ -85,7 +90,7 @@
 
     <!-- /////////////////////////////////////////////////////////////// -->
 
-    <footer class="footer">
+    <footer class="footer" id="#about">
         <img class="logo flex" src="img/LOGO.png">
         <p>all rights reserved 2020</p>
     </footer>

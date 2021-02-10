@@ -4,8 +4,6 @@ const MEMES_KEY = 'memes';
 
 var gMemes;
 var gCurrMemeId = 1
-var gSize = 50;
-var gSize2 = 50;
 var gLine = 0;
 var gCount = 0;
 var gSavedMemes = [];
@@ -20,7 +18,7 @@ var gImgs = [
     { id: 2, url: 'img/3.jpg', keywords: ['dog', 'animal', 'baby'], lines: 2 },
     { id: 3, url: 'img/4.jpg', keywords: ['cat', 'animal'], lines: 1 },
     { id: 4, url: 'img/5.jpg', keywords: ['baby', 'happy'], lines: 1 },
-    { id: 5, url: 'img/6.jpg', keywords: ['carzy', 'sarcastic'], lines: 2 }
+    { id: 5, url: 'img/6.jpg', keywords: ['carzy', 'sarcastic'], lines: 3 }
 ];
 
 var gMeme = {
@@ -28,21 +26,33 @@ var gMeme = {
     selectedLineIdx: gImgs[gCurrMemeId].lines,
     lines: [{
             txt: 'Type something',
-            size: gSize,
+            size: 50,
             align: 'left',
             x: 110,
             y: 65,
-            color: 'red',
-            borderColor: 'white'
+            color: 'black',
+            borderColor: 'red',
+            font: 'impact',
         },
         {
             txt: 'Type another thing',
-            size: gSize,
+            size: 50,
             align: 'left',
             x: 80,
             y: 505,
             color: 'black',
-            borderColor: 'white'
+            borderColor: 'white',
+            font: 'impact'
+        },
+        {
+            txt: 'Type another thing',
+            size: 50,
+            align: 'left',
+            x: 80,
+            y: gElCanvas.height / 2,
+            color: 'black',
+            borderColor: 'white',
+            font: 'impact'
         }
     ]
 }
@@ -65,11 +75,11 @@ function drawText(imgIdx) {
     gMeme.selectedImgId = gCurrMemeId;
     gMeme.selectedLineIdx = gImgs[gCurrMemeId].lines;
     gCtx.beginPath();
-    gCtx.lineWidth = 2;
-    gCtx.fillStyle = gMeme.lines[0].borderColor;
+    gCtx.lineWidth = 1;
+    gCtx.fillStyle = gMeme.lines[0].color;
     gCtx.fill();
-    gCtx.strokeStyle = gMeme.lines[0].color;
-    gCtx.font = `${gSize}px IMPACT`;
+    gCtx.strokeStyle = gMeme.lines[0].borderColor;
+    gCtx.font = `${gMeme.lines[0].size}px ${gMeme.lines[0].font}`;
     gCtx.fillText(gMeme.lines[0].txt, gMeme.lines[0].x, gMeme.lines[0].y);
     gCtx.strokeText(gMeme.lines[0].txt, gMeme.lines[0].x, gMeme.lines[0].y);
 }
@@ -77,13 +87,26 @@ function drawText(imgIdx) {
 function drawSecondText() {
     if (gMeme.selectedLineIdx > 1) {
         gCtx.beginPath();
-        gCtx.lineWidth = 2;
-        gCtx.fillStyle = gMeme.lines[1].borderColor;
+        gCtx.lineWidth = 1;
+        gCtx.fillStyle = gMeme.lines[1].color;
         gCtx.fill();
-        gCtx.strokeStyle = gMeme.lines[1].color;
-        gCtx.font = `${gSize2}px IMPACT`;
+        gCtx.strokeStyle = gMeme.lines[1].borderColor;
+        gCtx.font = `${gMeme.lines[1].size}px ${gMeme.lines[0].font}`;
         gCtx.fillText(gMeme.lines[1].txt, gMeme.lines[1].x, gMeme.lines[1].y);
         gCtx.strokeText(gMeme.lines[1].txt, gMeme.lines[1].x, gMeme.lines[1].y);
+    } else return;
+}
+
+function drawText3() {
+    if (gMeme.selectedLineIdx > 2) {
+        gCtx.beginPath();
+        gCtx.lineWidth = 1;
+        gCtx.fillStyle = gMeme.lines[2].color;
+        gCtx.fill();
+        gCtx.strokeStyle = gMeme.lines[2].borderColor;
+        gCtx.font = `${gMeme.lines[2].size}px ${gMeme.lines[0].font}`;
+        gCtx.fillText(gMeme.lines[2].txt, gMeme.lines[2].x, gMeme.lines[2].y);
+        gCtx.strokeText(gMeme.lines[2].txt, gMeme.lines[2].x, gMeme.lines[2].y);
     } else return;
 }
 
@@ -115,31 +138,57 @@ function moveDown() {
 }
 
 function increaseFont() {
-    if (!gLine) gSize += 5;
-    else gSize2 += 5;
+    gMeme.lines[gLine].size += 5;
 }
 
 function decreaseFont() {
-    if (!gLine) gSize -= 5;
-    else gSize2 -= 5;
+    gMeme.lines[gLine].size -= 5;
 }
 
 function switchLine() {
     if (gImgs[gCurrMemeId].lines === 1) return;
-    if (!gCount) {
-        gLine++
-        gMeme.lines[1].color = 'red';
-        gMeme.lines[0].color = 'black';
-        gCount++
-    } else {
-        gLine--
-        gMeme.lines[0].color = 'red';
-        gMeme.lines[1].color = 'black';
-        gCount--
+    else if (gImgs[gCurrMemeId].lines === 2) {
+        if (!gCount) {
+            gLine++
+            gMeme.lines[0].borderColor = 'white';
+            gMeme.lines[1].borderColor = 'red';
+            gCount++
+        } else if (gCount === 1) {
+            gLine--
+            gMeme.lines[0].borderColor = 'red';
+            gMeme.lines[1].borderColor = 'white';
+            gCount--
+        }
+    } else if (gImgs[gCurrMemeId].lines === 3) {
+        if (!gCount) {
+            gLine = 2;
+            gMeme.lines[0].borderColor = 'white';
+            gMeme.lines[2].borderColor = 'red';
+            gMeme.lines[1].borderColor = 'white';
+            gCount = 2;
+            console.log('gCount:', gCount)
+        } else if (gCount === 2) {
+            gLine = 1;
+            gMeme.lines[0].borderColor = 'white';
+            gMeme.lines[2].borderColor = 'white';
+            gMeme.lines[1].borderColor = 'red';
+            gCount = 1;
+            console.log('gCount:', gCount)
+        } else if (gCount === 1) {
+            gLine = 0;
+            gMeme.lines[0].borderColor = 'red';
+            gMeme.lines[2].borderColor = 'white';
+            gMeme.lines[1].borderColor = 'white';
+            gCount = 0;
+            console.log('gCount:', gCount)
+        }
     }
 }
 
+
 function saveAndRestore() {
+    gMeme.lines[0].borderColor = 'white';
+    gMeme.lines[1].borderColor = 'white';
     var canvas = gElCanvas;
     gSavedMemes.push(canvas);
     console.log('canvas:', canvas);
@@ -159,4 +208,12 @@ function downLoadCanvas(elLink) {
 
 function getGSavedMemes() {
     return gSavedMemes;
+}
+
+function changeTextColor(color) {
+    gMeme.lines[gLine].color = color;
+}
+
+function changeFont(font) {
+    gMeme.lines[0].font = font;
 }
