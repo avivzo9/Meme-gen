@@ -9,7 +9,8 @@
     <link rel='stylesheet' href='style.css'>
 </head>
 
-<body>
+<body onload="init()">
+
     <section class="header-container flex container">
         <header class="header flex second-container">
             <img class="logo flex" src="img/LOGO.png">
@@ -21,43 +22,59 @@
         </header>
     </section>
 
-    <section class="search-line container flex">
-        <div class="second-container flex">
-            <input type="search" placeholder="Enter search keyword">
-            <ul class="search-words">
-                <li>funny</li>
-                <li>comics</li>
-                <li>dogs</li>
-                <li>drinks</li>
-                <li>books</li>
-                <li><a href="#">more...</a>
-            </ul>
+    <section class="img-pick">
+        <div class="search-line container flex">
+            <div class="second-container flex">
+                <input type="search" placeholder="Enter search keyword">
+                <ul class="search-words">
+                    <li>funny</li>
+                    <li>comics</li>
+                    <li>dogs</li>
+                    <li>drinks</li>
+                    <li>books</li>
+                    <li><a href="#">more...</a>
+                </ul>
+            </div>
+        </div>
+
+        <section class="main-img second-container">
+            <div class="img-grid">
+            </div>
+        </section>
+
+        <section class="personal-info">
+            <img src="img/IMG-20200221-WA0001.jpg">
+            <div class="personal-content">
+                <h2>Aviv Zohar</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit ipsum delectus, earum inventore natus iusto.</p>
+            </div>
+        </section>
+    </section>
+
+    <!-- /////////////////////////////////////////////////////////////// -->
+
+    <section class="editor-container">
+        <div class=" container flex">
+            <div class="editor second-container flex">
+                <canvas class="canvas flex" onclick="draw(event)" width="550" height="550"></canvas>
+                <div class="canvas-editor flex">
+                    <form class="text" onsubmit="onDrawText(event)">
+                        <input type="text" placeholder="Text" name="txt">
+                        <button>save</button>
+                    </form>
+                    <button class="edit-btn"></button>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section class="main-img second-container">
-        <div class="img-grid">
-            <img class="img-1" src="img/1.jpg">
-            <img class="img-2" src="img/2.jpg">
-            <img class="img-3" src="img/3.jpg">
-            <img class="img-4" src="img/4.jpg">
-            <img class="img-5" src="img/5.jpg">
-            <img class="img-6" src="img/6.jpg">
-        </div>
-    </section>
-
-    <section class="personal-info">
-        <img src="img/IMG-20200221-WA0001.jpg">
-        <div class="personal-content">
-            <h2>Aviv Zohar</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit ipsum delectus, earum inventore natus iusto.</p>
-        </div>
-    </section>
-
-    <footer class="footer">
+    <footer class="footer flex">
         <img class="logo flex" src="img/LOGO.png">
         <p>all rights reserved 2020</p>
     </footer>
+
+    <script src="meme-service.js"></script>
+    <script src="main.js"></script>
 </body>
 
 </html>

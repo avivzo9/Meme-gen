@@ -16,6 +16,15 @@ a {
 }
 
 
+/* pages */
+
+.img-pick {}
+
+.editor-container {
+    display: none;
+}
+
+
 /* header */
 
 .logo {
@@ -66,6 +75,11 @@ a {
     display: flex;
 }
 
+.edit-btn {
+    width: 61px;
+    height: 61px;
+}
+
 
 /* img grid */
 
@@ -73,4 +87,31 @@ a {
     display: grid;
     grid-template-columns: repeat(3, 350px);
     grid-template-rows: repeat(2, 350px);
+}
+
+
+/* editor */
+
+.editor-container {
+    height: 600px;
+    align-items: center;
+}
+
+.editor {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.canvas {
+    max-width: 550px;
+    max-height: 550px;
+    border: 2px solid black;
+}
+
+.canvas-editor
+/* footer */
+
+.footer {
+    background-color: #FF7F00;
+    flex-direction: column;
 }
