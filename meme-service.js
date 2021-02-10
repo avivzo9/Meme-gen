@@ -1,7 +1,9 @@
 'use strict';
 
+const MEMES_KEY = 'memes';
 
 var gMemes;
+var gSavedMemes = [];
 var gCurrMemeId = 1
 var gX = 110;
 var gY = 65;
@@ -40,6 +42,7 @@ var gMeme = {
         }
     ]
 }
+
 
 
 _createMemes()
@@ -127,6 +130,7 @@ function decreaseFont() {
 }
 
 function switchLine() {
+    if (gImgs[gCurrMemeId].lines === 1) return;
     if (gCount === 0) {
         gLine++
         gCount--
@@ -134,4 +138,19 @@ function switchLine() {
         gLine--
         gCount++
     }
+}
+
+function saveAndRestore() {
+    gCtx.save();
+    _SaveMemesToStorage()
+}
+
+function _SaveMemesToStorage() {
+    saveToStorage(MEMES_KEY, gElCanvas);
+}
+
+function downLoadCanvas(elLink) {
+    const data = gElCanvas.toDataURL();
+    elLink.href = data;
+    elLink.download = 'my-meme.jpeg';
 }

@@ -16,7 +16,7 @@
             <img class="logo flex" src="img/LOGO.png">
             <ul class="nav-container flex">
                 <li><a href="#">Gallery</a></li>
-                <li><a href="#">Memes</a></li>
+                <li><a href="#" onclick="onMemesShow()">Memes</a></li>
                 <li><a href="#">About</a></li>
             </ul>
         </header>
@@ -46,7 +46,8 @@
             <img src="img/IMG-20200221-WA0001.jpg">
             <div class="personal-content">
                 <h2>Aviv Zohar</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit ipsum delectus, earum inventore natus iusto.</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit ipsum delectus, earum inventore natus iusto.
+                </p>
             </div>
         </section>
     </section>
@@ -67,16 +68,30 @@
                     <button class="edit-btn" onclick="onIncreaseFont()">increase font</button>
                     <button class="edit-btn" onclick="onDecreaseFont()">decrease font</button>
                     <button class="edit-btn" onclick="onSwitchLine()">Switch Text</button>
+                    <button class="edit-btn" onclick="saveAndRestore()">Save</button>
+                    <a href="#" class="edit-btn" onclick="onDownloadCanvas(this)" download="">Download meme</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="footer flex">
+    <!-- /////////////////////////////////////////////////////////////// -->
+
+    <section class="saved-memes">
+        <div class="memes-container container flex">
+            <div class="saved-memes-container second container"></div>
+        </div>
+    </section>
+
+    <!-- /////////////////////////////////////////////////////////////// -->
+
+    <footer class="footer">
         <img class="logo flex" src="img/LOGO.png">
         <p>all rights reserved 2020</p>
     </footer>
 
+
+    <script src="storage-service.js"></script>
     <script src="meme-service.js"></script>
     <script src="main.js"></script>
 </body>

@@ -22,6 +22,12 @@ a {
     display: none;
 }
 
+.saved-memes {
+    display: none;
+    /* background-color: black; */
+    height: 87vh;
+}
+
 
 /* header */
 
@@ -41,6 +47,8 @@ a {
     height: 70px;
     background-color: #FF7F00;
     justify-content: center;
+    /* position: fixed;
+    top: 0; */
 }
 
 .header {
@@ -107,7 +115,7 @@ a {
     border: 2px solid black;
 }
 
-.canvas-editor
+
 /* footer */
 
 .footer {
