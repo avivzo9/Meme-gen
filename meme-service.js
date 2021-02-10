@@ -74,7 +74,6 @@ function drawImg(elImg) {
 }
 
 function drawText(imgIdx) {
-    console.log('imgIdx:', imgIdx)
     gCurrMemeId = imgIdx;
     imgIdx--
     gCtx.beginPath();
