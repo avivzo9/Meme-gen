@@ -20,38 +20,42 @@ var gImgs = [
     { id: 4, url: 'img/5.jpg', keywords: ['baby', 'happy'], lines: 2 },
     { id: 5, url: 'img/6.jpg', keywords: ['carzy', 'sarcastic'], lines: 2 }
 ];
+
 var gMeme = {
     selectedImgId: 1,
     selectedLineIdx: gImgs[gCurrMemeId].lines,
     lines: [{
             txt: 'Type something',
             size: 50,
-            align: 'left',
-            x: 110,
+            align: 'center',
+            x: 270,
             y: 65,
             color: 'black',
-            borderColor: 'red',
+            borderColor: 'white',
             font: 'impact',
+            shadowBlur: 15
         },
         {
             txt: 'Type another thing',
             size: 50,
-            align: 'left',
-            x: 80,
+            align: 'center',
+            x: 270,
             y: 505,
             color: 'black',
             borderColor: 'white',
-            font: 'impact'
+            font: 'impact',
+            shadowBlur: 0
         },
         {
             txt: 'Type another thing',
             size: 50,
-            align: 'left',
-            x: 80,
+            align: 'center',
+            x: 270,
             y: gElCanvas.height / 2,
             color: 'black',
             borderColor: 'white',
-            font: 'impact'
+            font: 'impact',
+            shadowBlur: 0
         }
     ]
 }
@@ -69,16 +73,26 @@ function drawImg(elImg) {
     gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height);
 }
 
+function drawCenterLine() {
+    gCtx.strokeStyle = "red";
+    gCtx.moveTo(270, 0);
+    gCtx.lineTo(270, 550);
+    gCtx.stroke();
+}
+
 function drawText(imgIdx) {
     gCurrMemeId = imgIdx;
     gMeme.selectedImgId = gCurrMemeId;
     gMeme.selectedLineIdx = gImgs[gCurrMemeId].lines;
     gCtx.beginPath();
-    gCtx.lineWidth = 1;
+    gCtx.lineWidth = 1.5;
     gCtx.fillStyle = gMeme.lines[0].color;
     gCtx.fill();
+    gCtx.shadowColor = 'red';
+    gCtx.shadowBlur = gMeme.lines[0].shadowBlur;
     gCtx.strokeStyle = gMeme.lines[0].borderColor;
     gCtx.font = `${gMeme.lines[0].size}px ${gMeme.lines[0].font}`;
+    gCtx.textAlign = gMeme.lines[0].align;
     gCtx.fillText(gMeme.lines[0].txt, gMeme.lines[0].x, gMeme.lines[0].y);
     gCtx.strokeText(gMeme.lines[0].txt, gMeme.lines[0].x, gMeme.lines[0].y);
 }
@@ -86,11 +100,14 @@ function drawText(imgIdx) {
 function drawSecondText() {
     if (gMeme.selectedLineIdx > 1) {
         gCtx.beginPath();
-        gCtx.lineWidth = 1;
+        gCtx.lineWidth = 1.5;
         gCtx.fillStyle = gMeme.lines[1].color;
         gCtx.fill();
+        gCtx.shadowColor = 'red';
+        gCtx.shadowBlur = gMeme.lines[1].shadowBlur;
         gCtx.strokeStyle = gMeme.lines[1].borderColor;
         gCtx.font = `${gMeme.lines[1].size}px ${gMeme.lines[0].font}`;
+        gCtx.textAlign = gMeme.lines[1].align;
         gCtx.fillText(gMeme.lines[1].txt, gMeme.lines[1].x, gMeme.lines[1].y);
         gCtx.strokeText(gMeme.lines[1].txt, gMeme.lines[1].x, gMeme.lines[1].y);
     } else return;
@@ -99,11 +116,14 @@ function drawSecondText() {
 function drawText3() {
     if (gMeme.selectedLineIdx > 2) {
         gCtx.beginPath();
-        gCtx.lineWidth = 1;
+        gCtx.lineWidth = 1.5;
         gCtx.fillStyle = gMeme.lines[2].color;
         gCtx.fill();
+        gCtx.shadowColor = 'red';
+        gCtx.shadowBlur = gMeme.lines[2].shadowBlur;
         gCtx.strokeStyle = gMeme.lines[2].borderColor;
         gCtx.font = `${gMeme.lines[2].size}px ${gMeme.lines[0].font}`;
+        gCtx.textAlign = gMeme.lines[2].align;
         gCtx.fillText(gMeme.lines[2].txt, gMeme.lines[2].x, gMeme.lines[2].y);
         gCtx.strokeText(gMeme.lines[2].txt, gMeme.lines[2].x, gMeme.lines[2].y);
     } else return;
@@ -149,35 +169,35 @@ function switchLine() {
     else if (gImgs[gCurrMemeId].lines === 2) {
         if (!gCount) {
             gLine++
-            gMeme.lines[0].borderColor = 'white';
-            gMeme.lines[1].borderColor = 'red';
+            gMeme.lines[0].shadowBlur = 0;
+            gMeme.lines[1].shadowBlur = 15;
             gCount++
         } else if (gCount === 1) {
             gLine--
-            gMeme.lines[0].borderColor = 'red';
-            gMeme.lines[1].borderColor = 'white';
+            gMeme.lines[0].shadowBlur = 15;
+            gMeme.lines[1].shadowBlur = 0;
             gCount--
         }
     } else if (gImgs[gCurrMemeId].lines === 3) {
         if (!gCount) {
             gLine = 2;
-            gMeme.lines[0].borderColor = 'white';
-            gMeme.lines[2].borderColor = 'red';
-            gMeme.lines[1].borderColor = 'white';
+            gMeme.lines[0].shadowBlur = 0;
+            gMeme.lines[2].shadowBlur = 15;
+            gMeme.lines[1].shadowBlur = 0;
             gCount = 2;
             console.log('gCount:', gCount)
         } else if (gCount === 2) {
             gLine = 1;
-            gMeme.lines[0].borderColor = 'white';
-            gMeme.lines[2].borderColor = 'white';
-            gMeme.lines[1].borderColor = 'red';
+            gMeme.lines[0].shadowBlur = 0;
+            gMeme.lines[2].shadowBlur = 0;
+            gMeme.lines[1].shadowBlur = 15;
             gCount = 1;
             console.log('gCount:', gCount)
         } else if (gCount === 1) {
             gLine = 0;
-            gMeme.lines[0].borderColor = 'red';
-            gMeme.lines[2].borderColor = 'white';
-            gMeme.lines[1].borderColor = 'white';
+            gMeme.lines[0].shadowBlur = 15;
+            gMeme.lines[2].shadowBlur = 0;
+            gMeme.lines[1].shadowBlur = 0;
             gCount = 0;
             console.log('gCount:', gCount)
         }
@@ -227,4 +247,20 @@ function deleteTextLine() {
     if (gImgs[gCurrMemeId].lines === 1) return;
     else gImgs[gCurrMemeId].lines--;
     console.log('gImgs[gCurrMemeId].lines:', gImgs[gCurrMemeId].lines)
+}
+
+function txtBorderColorChange(color) {
+    gMeme.lines[gLine].borderColor = color;
+}
+
+function alignLeft() {
+    gMeme.lines[gLine].align = 'right';
+}
+
+function alignRight() {
+    gMeme.lines[gLine].align = 'left';
+}
+
+function alignCenter() {
+    gMeme.lines[gLine].align = 'center';
 }

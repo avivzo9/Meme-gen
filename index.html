@@ -64,12 +64,16 @@
                         <button>save</button>
                     </form>
                     <input type="color" class="edit-btn" name="txt-color" onchange="onTxtColorChange()">
+                    <input type="color" class="edit-btn" name="txt-border-color" value="#ffffff" onchange="onTxtBorderColorChange()">
                     <button class="edit-btn" onclick="onMoveUp()">Move up</button>
                     <button class="edit-btn" onclick="onMoveDown()">Move down</button>
                     <button class="edit-btn" onclick="onIncreaseFont()">Increase font</button>
                     <button class="edit-btn" onclick="onDecreaseFont()">Decrease font</button>
                     <button class="edit-btn" onclick="onAddTextLine()">Add text line</button>
                     <button class="edit-btn" onclick="onDeleteTextLine()">Delete text line</button>
+                    <button class="edit-btn" onclick="onLeftAlign()">align Left</button>
+                    <button class="edit-btn" onclick="onRightAlign()">align right</button>
+                    <button class="edit-btn" onclick="onCenterAlign()">align center</button>
                     <select onchange="onFontChange(this.value)">
                         <option class="impact">Impact</option>
                         <option class="ariel">Ariel</option>

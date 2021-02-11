@@ -51,6 +51,7 @@ function renderCanvas() {
     drawText(gCurrMemeId);
     drawSecondText();
     drawText3();
+    drawCenterLine();
 }
 
 function onMoveUp() {
@@ -74,7 +75,6 @@ function onDecreaseFont() {
 }
 
 function onSwitchLine() {
-    // var elText = document.querySelector('input[name="txt"]');
     switchLine();
     renderCanvas();
 }
@@ -128,5 +128,26 @@ function onAddTextLine() {
 
 function onDeleteTextLine() {
     deleteTextLine();
+    renderCanvas();
+}
+
+function onTxtBorderColorChange() {
+    var elColor = document.querySelector('input[name="txt-border-color"]');
+    txtBorderColorChange(elColor.value);
+    renderCanvas();
+}
+
+function onLeftAlign() {
+    alignLeft();
+    renderCanvas();
+}
+
+function onRightAlign() {
+    alignRight();
+    renderCanvas();
+}
+
+function onCenterAlign() {
+    alignCenter();
     renderCanvas();
 }
