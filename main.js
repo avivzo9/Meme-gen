@@ -79,6 +79,9 @@ function onSwitchLine() {
 }
 
 function onMemesShow() {
+    var elFooter = document.querySelector('.footer-container');
+    elFooter.style.position = 'fixed';
+    elFooter.style.bottom = 0;
     gElImgPick.style.display = 'none';
     gElMemes.style.display = 'block';
     gElEditor.style.display = 'none';

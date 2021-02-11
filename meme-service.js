@@ -38,7 +38,9 @@ var gImgs = [
     { id: 14, url: 'img/15.jpg', keywords: ['carzy', 'sarcastic'], lines: 2 },
     { id: 15, url: 'img/16.jpg', keywords: ['carzy', 'sarcastic'], lines: 2 },
     { id: 16, url: 'img/17.jpg', keywords: ['carzy', 'sarcastic'], lines: 2 },
-    { id: 17, url: 'img/18.jpg', keywords: ['carzy', 'sarcastic'], lines: 2 }
+    { id: 17, url: 'img/18.jpg', keywords: ['carzy', 'sarcastic'], lines: 2 },
+    { id: 18, url: 'img/19.jpg', keywords: ['carzy', 'sarcastic'], lines: 2 },
+    { id: 19, url: 'img/20.jpg', keywords: ['carzy', 'sarcastic'], lines: 2 }
 ];
 
 // 
