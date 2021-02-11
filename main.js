@@ -3,10 +3,12 @@
 var gElImgPick = document.querySelector('.img-pick');
 var gElEditor = document.querySelector('.editor-container');
 var gElMemes = document.querySelector('.saved-memes');
-var currImg;
+var gCurrImg;
+var gImg;
 
 function init() {
     renderImages();
+    gElEditor.style.display = 'none';
     // initDragAndDrop();
 }
 
@@ -15,7 +17,7 @@ function renderImages() {
     var strHtml = '';
     var memes = getGMemes();
     memes.map((img) => {
-        var str = `<img class="img-${img.id}" onclick="onLoadPng(${img.id})" src="${img.url}">`
+        var str = `<img class="img-${img.id} img-design" onclick="onLoadPng(${img.id})" src="${img.url}">`
         strHtml += str;
     }).join('');
     elGrid.innerHTML = strHtml;
@@ -23,13 +25,11 @@ function renderImages() {
 
 function onLoadPng(img) {
     var elImg = document.querySelector(`.img-${img}`);
-    currImg = elImg;
+    gCurrImg = elImg;
     gElImgPick.style.display = 'none';
-    gElEditor.style.display = 'block';
-    drawImg(elImg);
+    gElEditor.style.display = 'flex';
+    drawImg(gCurrImg);
     drawText(img);
-    drawSecondText();
-    drawText3();
 }
 
 function onChangeText(ev) {
@@ -45,13 +45,12 @@ function draw(ev) {
 }
 
 function renderCanvas() {
-    gCtx.fillStyle = "white"
-    gCtx.fillRect(0, 0, gElCanvas.width, gElCanvas.height)
-    drawImg(currImg);
+    gCtx.fillStyle = "white";
+    gCtx.fillRect(0, 0, gElCanvas.width, gElCanvas.height);
+    console.log('gImg:', gImg)
+    if (gImg !== undefined) gCtx.drawImage(gImg, 0, 0, gElCanvas.width, gElCanvas.height);
+    else drawImg(gCurrImg);
     drawText(gCurrMemeId);
-    drawSecondText();
-    drawText3();
-    drawCenterLine();
 }
 
 function onMoveUp() {
@@ -89,21 +88,23 @@ function onMemesShow() {
 function onGalleryView() {
     gElMemes.style.display = 'none';
     gElImgPick.style.display = 'block';
+    location.reload();
 }
 
 function onDownloadCanvas(elLink) {
     downLoadCanvas(elLink);
 }
 
-function renderSavedImg() {
+function onSaveAndRestore() {
+    saveAndRestore();
+}
+
+function renderSavedImg() { //////////////////////////////////////
     var elSavedMemes = document.querySelector('.saved-memes-container');
     var dataURL = localStorage.getItem(MEMES_KEY);
     var img = new Image;
     img.src = dataURL;
-    img.onload = () => {
-        gCtx.drawImage(img, 0, 0);
-    };
-    // gSavedMemes.push(img);
+    getGSavedMemes().push(img);
     var savedMemes = getGSavedMemes();
     savedMemes.map((img) => {
         return elSavedMemes.appendChild(img);
@@ -151,3 +152,40 @@ function onCenterAlign() {
     alignCenter();
     renderCanvas();
 }
+
+function downloadImg(elLink) {
+    var imgContent = gElCanvas.toDataURL('image/jpeg')
+    elLink.href = imgContent
+}
+
+function onImgInput(ev) {
+    loadImageFromInput(ev, renderUploadImg)
+}
+
+function loadImageFromInput(ev, onImageReady) {
+    gElImgPick.style.display = 'none';
+    gElEditor.style.display = 'flex';
+    var reader = new FileReader()
+
+    reader.onload = function(event) {
+        var img = new Image()
+        img.onload = onImageReady.bind(null, img)
+        img.src = event.target.result
+    }
+    reader.readAsDataURL(ev.target.files[0])
+}
+
+function renderUploadImg(img) {
+    gImg = img;
+    gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
+    drawText(getGCurrMemeId());
+}
+
+function onSearchByWord(word) {
+    searchByWord(word);
+}
+
+// function onDrawSticker() {
+//     drawSticker();
+//     renderCanvas();
+// }

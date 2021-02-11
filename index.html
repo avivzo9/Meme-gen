@@ -25,82 +25,108 @@
     <section class="img-pick">
         <div class="search-line container flex">
             <div class="second-container flex">
-                <input type="search" placeholder="Enter search keyword">
-                <ul class="search-words">
-                    <li>funny</li>
-                    <li>comics</li>
-                    <li>dogs</li>
-                    <li>drinks</li>
-                    <li>books</li>
+                <!-- <form onsubmit="onSearchImgByKeyword(event)" method="get">
+                    <input list="img-grid" name="browser" id="browser" name="search-bar">
+                    <datalist id="img-grid">
+                      <option value="happy">
+                      <option value="crazy">
+                      <option value="sarcastic">
+                      <option value="baby">
+                      <option value="animal">
+                      <option value="Donald Trump">
+                      <option value="Dog">
+                      <option value="Cat">
+                    </datalist>
+                    <input type="submit">
+                </form> -->
+
+                <!-- <ul class="search-words">
+                    <li onclick="onSearchByWord(this.innerText)">funny</li>
+                    <li onclick="onSearchByWord(this.innerText)">comics</li>
+                    <li onclick="onSearchByWord(this.innerText)">dog</li>
+                    <li onclick="onSearchByWord(this.innerText)">drinks</li>
+                    <li onclick="onSearchByWord(this.innerText)">books</li>
                     <li><a href="#">more...</a>
-                </ul>
+                </ul> -->
             </div>
         </div>
 
-        <section class="main-img second-container">
-            <div class="img-grid">
+        <section class="main-img container">
+            <div class="sub-main-img second-container flex">
+                <div class="upload-img flex">
+                    <!-- <label for="img-upload" class="file-upload">upload img</label>
+                    <input type="file" name="img-upload" onchange="onImgInput(event)"> -->
+
+                    <label class="custom-file-upload">
+                    <input name="img-upload" onchange="onImgInput(event)" type="file"/>
+                    <i class="fa fa-cloud-upload"></i>Upload Image</label>
+                </div>
+                <div class="img-grid">
+                </div>
             </div>
         </section>
 
-        <section class="personal-info">
-            <img src="img/IMG-20200221-WA0001.jpg">
-            <div class="personal-content">
-                <h2>Aviv Zohar</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit ipsum delectus, earum inventore natus iusto.
-                </p>
+        <section class="personal-info second-container ">
+            <div class="personal-content-container flex">
+                <img class="my-img flex " src="img/IMG-20200221-WA0001.jpg">
+                <div class="personal-content flex">
+                    <h2>Aviv Zohar</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit ipsum delectus, earum inventore natus iusto.
+                    </p>
+                </div>
             </div>
         </section>
     </section>
 
     <!-- /////////////////////////////////////////////////////////////// -->
 
-    <section class="editor-container">
-        <div class=" container flex">
-            <div class="editor second-container flex">
-                <canvas class="canvas flex" onclick="draw(event)" width="550" height="550"></canvas>
-                <div class="canvas-editor flex">
-                    <form class="text" onsubmit="onChangeText(event)">
-                        <input type="text" placeholder="Text" name="txt">
-                        <button>save</button>
-                    </form>
-                    <input type="color" class="edit-btn" name="txt-color" onchange="onTxtColorChange()">
-                    <input type="color" class="edit-btn" name="txt-border-color" value="#ffffff" onchange="onTxtBorderColorChange()">
-                    <button class="edit-btn" onclick="onMoveUp()">Move up</button>
-                    <button class="edit-btn" onclick="onMoveDown()">Move down</button>
-                    <button class="edit-btn" onclick="onIncreaseFont()">Increase font</button>
-                    <button class="edit-btn" onclick="onDecreaseFont()">Decrease font</button>
-                    <button class="edit-btn" onclick="onAddTextLine()">Add text line</button>
-                    <button class="edit-btn" onclick="onDeleteTextLine()">Delete text line</button>
-                    <button class="edit-btn" onclick="onLeftAlign()">align Left</button>
-                    <button class="edit-btn" onclick="onRightAlign()">align right</button>
-                    <button class="edit-btn" onclick="onCenterAlign()">align center</button>
-                    <select onchange="onFontChange(this.value)">
+    <section class="editor-container container flex">
+        <div class="editor second-container flex">
+            <canvas class="canvas flex" onclick="draw(event)" width="550" height="550"></canvas>
+            <div class="canvas-editor flex">
+                <form class="text" onsubmit="onChangeText(event)">
+                    <input type="text" placeholder="Type Here" name="txt" class="text">
+                    <!-- <button>save</button> -->
+                </form>
+
+                <button class="edit-btn move-up-btn" onclick="onMoveUp()">Move up</button>
+                <button class="edit-btn move-down-btn" onclick="onMoveDown()">Move down</button>
+                <button class="edit-btn switch-select" onclick="onSwitchLine()"><img class="icon flex" src="icons/align-to-right.png"></button>
+                <button class="edit-btn add-btn" onclick="onAddTextLine()"><img class="icon flex" src="icons/add.png"></button>
+                <button class="edit-btn delete-btn" onclick="onDeleteTextLine()"><img class="icon flex" src="icons/trash.png"></button>
+                <button class="edit-btn increase-btn" onclick="onIncreaseFont()"><img class="icon flex" src="icons/increase font - icon.png"></button>
+                <button class="edit-btn decrease-btn" onclick="onDecreaseFont()"><img class="icon flex" src="icons/decrease font - icon.png"></button>
+                <button class="edit-btn left-btn" onclick="onLeftAlign()"><img class="icon flex" src="icons/align-to-left.png"></button>
+                <button class="edit-btn center-btn" onclick="onCenterAlign()"><img class="icon flex" src="icons/center-text-alignment.png"></button>
+                <button class="edit-btn right-btn" onclick="onRightAlign()"><img class="icon flex" src="icons/up-and-down-opposite-double-arrows-side-by-side.png"></button>
+                <select class="edit-btn font-btn" onchange="onFontChange(this.value)">
                         <option class="impact">Impact</option>
                         <option class="ariel">Ariel</option>
                     </select>
-                    <button class="edit-btn" onclick="onSwitchLine()">Switch Text</button>
-                    <button class="edit-btn" onclick="saveAndRestore()">Save</button>
-                    <a href="#" class="edit-btn" onclick="onDownloadCanvas(this)" download="">Download meme</a>
-                </div>
+                <input type="color" class="edit-btn border-color-btn" name="txt-border-color" value="#ffffff" onchange="onTxtBorderColorChange()">
+                <input type="color" class="edit-btn color-btn" name="txt-color" onchange="onTxtColorChange()">
+                <button class="edit-btn save-btn" onclick="onSaveAndRestore()">Save</button>
+                <a href="#" class="edit-btn download-btn" onclick="onDownloadCanvas(this)" download="">Download meme</a>
             </div>
         </div>
     </section>
 
     <!-- /////////////////////////////////////////////////////////////// -->
 
-    <section class="saved-memes">
-        <div class="memes-container container flex">
-            <div class="saved-memes-container second container"></div>
+    <section class="saved-memes container">
+        <div class="memes-container second-container flex">
+            <div class="saved-memes-container img-grid"></div>
         </div>
     </section>
 
     <!-- /////////////////////////////////////////////////////////////// -->
 
-    <footer class="footer" id="#about">
-        <img class="logo flex" src="img/LOGO.png">
-        <p>all rights reserved 2020</p>
+    <footer class="footer-container" id="#about">
+        <div class="footer second-container flex">
+            <img class="footer-logo flex" src="img/LOGO.png">
+            <p class="copyrights">all rights reserved 2020</p>
+        </div>
     </footer>
-
 
     <script src="storage-service.js"></script>
     <script src="meme-service.js"></script>
