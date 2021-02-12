@@ -534,6 +534,9 @@ input[type="file"] {
     .save-btn {
         width: 100%;
     }
+    .menu {
+        display: none;
+    }
 }
 
 @media (max-width: 750px) {
@@ -571,5 +574,8 @@ input[type="file"] {
     }
     .save-btn {
         width: 100%;
+    }
+    .menu {
+        display: inline-block;
     }
 }

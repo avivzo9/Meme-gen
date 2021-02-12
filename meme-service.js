@@ -97,7 +97,6 @@ function drawImg(elImg) {
 }
 
 function drawText(imgIdx) {
-    console.log('imgIdx:', imgIdx)
     gCurrMemeId = imgIdx;
     gMeme.selectedImgId = gCurrMemeId;
     gMeme.selectedLineIdx = gImgs[gCurrMemeId].lines;
@@ -144,6 +143,7 @@ function drawText3() {
     gCtx.strokeText(gMeme.lines[2].txt, gMeme.lines[2].x, gMeme.lines[2].y);
 }
 
+//////////////////////////////button functions//////////////////////////////
 
 function changeText(txt) {
     gMeme.lines[gLine].txt = txt;
@@ -200,28 +200,25 @@ function switchLine() {
             gMeme.lines[2].shadowBlur = 15;
             gMeme.lines[1].shadowBlur = 0;
             gCount = 2;
-            console.log('gCount:', gCount)
         } else if (gCount === 2) {
             gLine = 1;
             gMeme.lines[0].shadowBlur = 0;
             gMeme.lines[2].shadowBlur = 0;
             gMeme.lines[1].shadowBlur = 15;
             gCount = 1;
-            console.log('gCount:', gCount)
         } else if (gCount === 1) {
             gLine = 0;
             gMeme.lines[0].shadowBlur = 15;
             gMeme.lines[2].shadowBlur = 0;
             gMeme.lines[1].shadowBlur = 0;
             gCount = 0;
-            console.log('gCount:', gCount)
         }
     }
 }
 
 
 function saveAndRestore() { //////////////
-    console.log('gSavedMemes:', gSavedMemes)
+    cleanBlur();
     gSavedMemes.push(gElCanvas);
     _SaveMemesToStorage();
 }
@@ -231,6 +228,7 @@ function _SaveMemesToStorage() {
 }
 
 function downLoadCanvas(elLink) {
+    cleanBlur();
     const data = gElCanvas.toDataURL();
     elLink.href = data;
     elLink.download = 'my-meme.jpeg';
@@ -282,28 +280,16 @@ function clearCanvas() {
     gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height);
 }
 
-function restartBrowser() {
-    chrome.send('restartBrowser');
-}
-
-// function searchImgByKeyword(ev, word) {
-//     ev.preventDefault();
-//     var sw = gImgs.find((keyword) => {
-//         console.log('keyword:', ...keyword.keywords)
-//         return keyword.keywords === word;
-//     })
-//     console.log(sw);
-// }
+////////////////////////////////////////////////////////////
 
 function searchByWord(word) {
-    console.log('word:', word)
     var imgs = [];
-    var sw = gImgs.map((keyword) => {
-        console.log('keyword:', ...keyword.keywords)
+    return gImgs.map((keyword) => {
         if (keyword.keywords === word) imgs.push(keyword.keywords);
     })
-    console.log('imgs:', imgs)
-    console.log('sw:', sw)
 }
 
-// function drawSticker() {}
+function cleanBlur() {
+    gMeme.lines[gLine].shadowBlur = 0;
+    renderCanvas();
+}

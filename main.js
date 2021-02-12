@@ -102,7 +102,7 @@ function onSaveAndRestore() {
     saveAndRestore();
 }
 
-function renderSavedImg() { //////////////////////////////////////
+function renderSavedImg() {
     var elSavedMemes = document.querySelector('.saved-memes-container');
     var dataURL = localStorage.getItem(MEMES_KEY);
     var img = new Image;
@@ -195,5 +195,5 @@ function openMenu() {
 
 function closeMenu() {
     var elNav = document.querySelector('.nav-container');
-    elNav.style.visibility = 'hidden';
+    if (elNav.style.visibility === 'visible') elNav.style.visibility = 'hidden';
 }
