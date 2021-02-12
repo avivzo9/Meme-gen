@@ -25,6 +25,10 @@ button {
     cursor: pointer;
 }
 
+button:focus {
+    outline: none;
+}
+
 p {
     color: rgb(112, 112, 112);
 }
@@ -97,6 +101,14 @@ li {
     justify-content: space-between;
     align-items: center;
     width: 1400px;
+}
+
+.menu {
+    border: none;
+    background-color: inherit;
+    color: white;
+    font-size: 40px;
+    display: inline-block;
 }
 
 
@@ -195,7 +207,7 @@ input[type="file"] {
 
 .editor {
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     width: 100%;
 }
 
@@ -315,13 +327,17 @@ input[type="file"] {
 }
 
 .save-btn {
-    grid-column: 4/5;
+    grid-column: 1/3;
     grid-row: 5/6;
+    width: 100%;
 }
 
 .download-btn {
-    grid-column: 5/6;
+    grid-column: 4/6;
     grid-row: 5/6;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
 }
 
 
@@ -343,9 +359,6 @@ input[type="file"] {
 .my-img {
     border: 2px solid black;
     border-radius: 50%;
-    object-fit: fill;
-    width: 250px;
-    height: 250px;
 }
 
 .personal-content {
@@ -394,9 +407,15 @@ input[type="file"] {
         grid-template-rows: repeat(auto, 230px);
         gap: 25px;
     }
+    .menu {
+        display: none;
+    }
 }
 
 @media (max-width: 1080px) {
+    .menu {
+        display: none;
+    }
     .second-container {
         max-width: 720px;
     }
@@ -415,23 +434,61 @@ input[type="file"] {
         max-width: 390px;
     }
     .img-grid {
-        grid-template-columns: repeat(2, 178px);
+        grid-template-columns: repeat(2, 157px);
         grid-template-rows: repeat(auto, 230px);
-        gap: 30px;
+        gap: 20px;
+    }
+    .main-screen {
+        visibility: hidden;
+        opacity: 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background-color: rgb(0 0 0 / 30%);
+        cursor: pointer;
+        transition: opacity .8s;
+    }
+    .menu-open {
+        visibility: visible;
     }
     .nav-container {
-        display: none;
-        justify-content: center;
+        flex-direction: column;
+        position: fixed;
+        right: 0;
+        top: 2px;
+        height: 100vh;
+        background-color: #292929;
+        box-shadow: 10px 10px 10px 10px #ababab;
+        transition: opacity .5s;
+        width: 200px;
+        justify-content: start;
+        visibility: hidden;
+        transition: 0.3s;
+    }
+    .nav-container>* {
+        border-bottom: 7px solid rgb(188 114 29);
+        height: 15%;
+    }
+    .nav-container>*:first-child {
+        border-top: 7px solid rgb(188 114 29);
+    }
+    .nav-container>*:not(:first-child) {
+        border-left: none;
     }
     .header {
-        justify-content: center;
+        justify-content: space-around;
     }
     .custom-file-upload {
         padding: 5px;
     }
     img {
-        height: 180px;
-        width: 180px;
+        height: 160px;
+        width: 160px;
+    }
+    .menu {
+        display: inline-block;
     }
 }
 
@@ -462,16 +519,57 @@ input[type="file"] {
         justify-content: end;
     }
     .footer-container {
-        position: absolute;
+        position: relative;
         bottom: 0;
     }
     .editor {
         flex-direction: row;
+    }
+    .font-btn {
+        width: 100%;
+    }
+    .download-btn {
+        width: 100%;
+    }
+    .save-btn {
+        width: 100%;
     }
 }
 
 @media (max-width: 750px) {
     .editor {
         flex-direction: column;
+        justify-content: space-evenly;
+    }
+    .canvas {
+        height: 300px;
+        width: 300px;
+    }
+    .canvas-editor {
+        height: 300px;
+        width: 300px;
+    }
+    .canvas-editor {
+        grid-template-columns: repeat(5, 57px);
+        grid-template-rows: repeat (auto, 1fr);
+        gap: 1px;
+        justify-content: end;
+    }
+    .edit-btn {
+        width: 45px;
+        height: 45px;
+    }
+    .icon {
+        width: 30px;
+        height: 30px;
+    }
+    .font-btn {
+        width: 160px;
+    }
+    .download-btn {
+        width: 105px;
+    }
+    .save-btn {
+        width: 100%;
     }
 }

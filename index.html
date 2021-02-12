@@ -11,18 +11,23 @@
 
 <body onload="init()">
 
-    <section class="header-container flex container">
+    <div class="main-screen" onclick="closeMenu()"></div>
+
+    <section class="header-container flex container menu-open">
         <header class="header flex second-container">
-            <img class="logo flex" src="img/LOGO.png">
-            <ul class="nav-container flex">
+            <img onclick="closeMenu()" class="logo flex" src="img/LOGO.png">
+            <ul onclick="closeMenu()" class="nav-container flex">
                 <li><a href="#" onclick="onGalleryView()">Gallery</a></li>
                 <li><a href="#" onclick="onMemesShow()">Memes</a></li>
                 <li><a href="##about">About</a></li>
             </ul>
+            <button onclick="openMenu()" class="menu">☰</button>
         </header>
     </section>
 
-    <section class="img-pick">
+    <div class="screen"></div>
+
+    <section onclick="closeMenu()" class="img-pick">
         <div class="search-line container flex">
             <div class="second-container flex">
                 <!-- <form onsubmit="onSearchImgByKeyword(event)" method="get">
@@ -51,7 +56,7 @@
             </div>
         </div>
 
-        <section class="main-img container">
+        <section onclick="closeMenu()" class="main-img container">
             <div class="sub-main-img second-container flex">
                 <div class="upload-img flex">
                     <!-- <label for="img-upload" class="file-upload">upload img</label>
@@ -66,7 +71,7 @@
             </div>
         </section>
 
-        <section class="personal-info second-container ">
+        <section onclick="closeMenu()" class="personal-info second-container ">
             <div class="personal-content-container flex">
                 <img class="my-img flex " src="img/IMG-20200221-WA0001.jpg">
                 <div class="personal-content flex">
@@ -80,7 +85,7 @@
 
     <!-- /////////////////////////////////////////////////////////////// -->
 
-    <section class="editor-container container flex">
+    <section onclick="closeMenu()" class="editor-container container flex">
         <div class="editor second-container flex">
             <canvas class="canvas flex" onclick="draw(event)" width="550" height="550"></canvas>
             <div class="canvas-editor flex">
@@ -106,7 +111,7 @@
                 <input type="color" size="20px" class="edit-btn border-color-btn" name="txt-border-color" value="#ffffff" onchange="onTxtBorderColorChange()">
                 <input type="color" size="20px" class="edit-btn color-btn" name="txt-color" onchange="onTxtColorChange()">
                 <button class="edit-btn save-btn" onclick="onSaveAndRestore()">Save</button>
-                <a href="#" class="edit-btn download-btn" onclick="onDownloadCanvas(this)" download="">Download meme</a>
+                <button class="edit-btn download-btn"><a href="#" class="download-btn" onclick="onDownloadCanvas(this)" download="">Download</a></button>
             </div>
         </div>
     </section>
@@ -121,7 +126,7 @@
 
     <!-- /////////////////////////////////////////////////////////////// -->
 
-    <footer class="footer-container" id="#about">
+    <footer onclick="closeMenu()" class="footer-container" id="#about">
         <div class="footer second-container flex">
             <img class="footer-logo flex" src="img/LOGO.png">
             <p class="copyrights">all rights reserved 2020</p>

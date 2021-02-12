@@ -188,7 +188,12 @@ function onSearchByWord(word) {
     searchByWord(word);
 }
 
-// function onDrawSticker() {
-//     drawSticker();
-//     renderCanvas();
-// }
+function openMenu() {
+    var elNav = document.querySelector('.nav-container');
+    elNav.style.visibility = 'visible';
+}
+
+function closeMenu() {
+    var elNav = document.querySelector('.nav-container');
+    elNav.style.visibility = 'hidden';
+}
