@@ -177,10 +177,9 @@ function decreaseFont() {
     gMeme.lines[gLine].size -= 5;
 }
 
-function switchLine(txt) {
+function switchLine() {
     if (gImgs[gCurrMemeId].lines === 1) return;
     else if (gImgs[gCurrMemeId].lines === 2) {
-        txt.value = '';
         if (!gCount) {
             gLine++
             gMeme.lines[0].shadowBlur = 0;

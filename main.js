@@ -71,6 +71,7 @@ function onSwitchLine() {
     var elText = document.querySelector('input[name="txt"]');
     switchLine();
     renderCanvas();
+    elText.value = '';
 }
 
 function onMemesShow() {
