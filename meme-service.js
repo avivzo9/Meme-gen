@@ -43,9 +43,7 @@ var gImgs = [
     { id: 19, url: 'img/20.jpg', keywords: ['carzy', 'sarcastic'], lines: 2 }
 ];
 
-// 
 var gMeme = {
-    // selectedImgId: 1,
     selectedLineIdx: gImgs[gCurrMemeId].lines,
     lines: [{
             txt: 'Type something',
@@ -179,9 +177,10 @@ function decreaseFont() {
     gMeme.lines[gLine].size -= 5;
 }
 
-function switchLine() {
+function switchLine(txt) {
     if (gImgs[gCurrMemeId].lines === 1) return;
     else if (gImgs[gCurrMemeId].lines === 2) {
+        txt.value = '';
         if (!gCount) {
             gLine++
             gMeme.lines[0].shadowBlur = 0;
@@ -216,10 +215,10 @@ function switchLine() {
     }
 }
 
-
-function saveAndRestore() { //////////////
+function saveAndRestore() { ///////////////////////////////////////////////
     cleanBlur();
-    gSavedMemes.push(gElCanvas);
+    var canvas = gElCanvas.toDataURL();
+    gSavedMemes.push(canvas);
     _SaveMemesToStorage();
 }
 
@@ -272,15 +271,10 @@ function alignCenter() {
     gMeme.lines[gLine].align = 'center';
 }
 
+////////////////////////////////////////////////////////////
 function getGCurrMemeId() {
     return gCurrMemeId;
 }
-
-function clearCanvas() {
-    gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height);
-}
-
-////////////////////////////////////////////////////////////
 
 function searchByWord(word) {
     var imgs = [];

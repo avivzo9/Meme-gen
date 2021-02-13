@@ -37,17 +37,11 @@ function onChangeText(ev) {
     var elText = document.querySelector('input[name="txt"]');
     changeText(elText.value);
     renderCanvas();
-    elText.value = '';
-}
-
-function draw(ev) {
-    // console.log('ev:', ev)
 }
 
 function renderCanvas() {
     gCtx.fillStyle = "white";
     gCtx.fillRect(0, 0, gElCanvas.width, gElCanvas.height);
-    console.log('gImg:', gImg)
     if (gImg !== undefined) gCtx.drawImage(gImg, 0, 0, gElCanvas.width, gElCanvas.height);
     else drawImg(gCurrImg);
     drawText(gCurrMemeId);
@@ -74,6 +68,7 @@ function onDecreaseFont() {
 }
 
 function onSwitchLine() {
+    var elText = document.querySelector('input[name="txt"]');
     switchLine();
     renderCanvas();
 }
@@ -102,16 +97,17 @@ function onSaveAndRestore() {
     saveAndRestore();
 }
 
-function renderSavedImg() {
+function renderSavedImg() { /////////////////////////////////////////////
+    var memes = loadFromStorage(MEMES_KEY);
     var elSavedMemes = document.querySelector('.saved-memes-container');
-    var dataURL = localStorage.getItem(MEMES_KEY);
-    var img = new Image;
-    img.src = dataURL;
-    getGSavedMemes().push(img);
-    var savedMemes = getGSavedMemes();
-    savedMemes.map((img) => {
-        return elSavedMemes.appendChild(img);
-    })
+    if (!memes) elSavedMemes.innerHTML = '<h1>There are no saved Memes</h1>';
+    else {
+        memes.map((meme) => {
+            var img = new Image;
+            img.src = meme;
+            elSavedMemes.appendChild(img);
+        })
+    }
 }
 
 function onTxtColorChange() {

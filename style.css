@@ -37,6 +37,14 @@ li {
     height: 70px;
 }
 
+select {
+    cursor: pointer;
+}
+
+select:focus {
+    outline: none;
+}
+
 
 /* pages */
 
@@ -76,11 +84,11 @@ li {
 }
 
 .nav-container>*:not(:first-child) {
-    border-left: 7px solid rgb(188 114 29);
+    border-left: 7px solid #fb9623;
 }
 
 .nav-container>*:hover {
-    border-bottom: 7px solid rgb(188 114 29);
+    border-bottom: 7px solid #fb9623;
 }
 
 .nav-container>*>* {
@@ -108,7 +116,7 @@ li {
     background-color: inherit;
     color: white;
     font-size: 40px;
-    display: inline-block;
+    display: none;
 }
 
 
@@ -165,6 +173,10 @@ li {
     box-shadow: 0px 0px 6px 3px black;
 }
 
+input[name="img-upload"] {
+    display: none;
+}
+
 .upload-img {
     justify-content: center;
     align-items: center;
@@ -172,10 +184,6 @@ li {
 
 .sub-main-img {
     flex-direction: column;
-}
-
-input[type="file"] {
-    display: none;
 }
 
 .custom-file-upload {
@@ -194,6 +202,7 @@ input[type="file"] {
 .custom-file-upload:hover {
     color: black;
     padding: 33px 73px;
+    box-shadow: 0px 0px 6px 3px black;
 }
 
 
@@ -234,14 +243,14 @@ input[type="file"] {
     gap: 5px;
     border: 3px solid black;
     border-radius: 20px;
-    background-color: #cea800;
+    background-color: darkcyan;
 }
 
 
 /* ////////////////////////// editor buttons ///////////////////////////////// */
 
 .edit-btn {
-    background-color: rgb(25 206 161);
+    background-color: #de9600;
     border: 1px solid black;
     border-radius: 20px;
     font-family: cursive;
@@ -318,12 +327,14 @@ input[type="file"] {
     grid-column: 4/5;
     grid-row: 4/5;
     border-radius: 0;
+    cursor: pointer;
 }
 
 .color-btn {
     grid-column: 5/6;
     grid-row: 4/5;
     border-radius: 0;
+    cursor: pointer;
 }
 
 .save-btn {
@@ -376,7 +387,7 @@ input[type="file"] {
     width: 100%;
     background-color: darkcyan;
     flex-direction: column;
-    height: 150px;
+    height: 210px;
 }
 
 .footer {
@@ -393,6 +404,25 @@ input[type="file"] {
 
 .copyrights {
     color: black;
+}
+
+.social-container {
+    width: 130px;
+    justify-content: space-around;
+}
+
+.social {
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+    margin-top: 15px;
+    padding: 7px;
+    transition: 0.5s;
+}
+
+.social:hover {
+    background-color: white;
+    border-radius: 50%;
 }
 
 
