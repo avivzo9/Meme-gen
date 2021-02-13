@@ -155,7 +155,7 @@ function onCenterAlign() {
 
 function downloadImg(elLink) {
     var imgContent = gElCanvas.toDataURL('image/jpeg')
-    elLink.href = imgContent
+    elLink.href = imgContent;
 }
 
 function onImgInput(ev) {
