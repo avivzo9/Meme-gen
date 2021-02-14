@@ -3,13 +3,13 @@
 var gElImgPick = document.querySelector('.img-pick');
 var gElEditor = document.querySelector('.editor-container');
 var gElMemes = document.querySelector('.saved-memes');
+var gElFooter = document.querySelector('.footer-container');
 var gCurrImg;
 var gImg;
 
 function init() {
     renderImages();
     gElEditor.style.display = 'none';
-    // initDragAndDrop();
 }
 
 function renderImages() {
@@ -40,9 +40,10 @@ function onChangeText(ev) {
 }
 
 function renderCanvas() {
-    gCtx.fillStyle = "white";
-    gCtx.fillRect(0, 0, gElCanvas.width, gElCanvas.height);
-    if (gImg !== undefined) gCtx.drawImage(gImg, 0, 0, gElCanvas.width, gElCanvas.height);
+    var ctx = getGCtx();
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, gElCanvas.width, gElCanvas.height);
+    if (gImg !== undefined) ctx.drawImage(gImg, 0, 0, gElCanvas.width, gElCanvas.height);
     else drawImg(gCurrImg);
     drawText(gCurrMemeId);
 }
@@ -75,9 +76,8 @@ function onSwitchLine() {
 }
 
 function onMemesShow() {
-    var elFooter = document.querySelector('.footer-container');
-    elFooter.style.position = 'fixed';
-    elFooter.style.bottom = 0;
+    gElFooter.style.position = 'absolute';
+    gElFooter.style.bottom = 0;
     gElImgPick.style.display = 'none';
     gElMemes.style.display = 'block';
     gElEditor.style.display = 'none';
@@ -87,7 +87,15 @@ function onMemesShow() {
 function onGalleryView() {
     gElMemes.style.display = 'none';
     gElImgPick.style.display = 'block';
-    location.reload();
+    gElEditor.style.display = 'none';
+    gElFooter.style.position = '';
+    clearCanvas();
+    var elText = document.querySelector('input[name="txt"]');
+    elText.value = '';
+}
+
+function onAboutView() {
+    onGalleryView();
 }
 
 function onDownloadCanvas(elLink) {
@@ -98,9 +106,10 @@ function onSaveAndRestore() {
     saveAndRestore();
 }
 
-function renderSavedImg() { /////////////////////////////////////////////
+function renderSavedImg() {
     var memes = loadFromStorage(MEMES_KEY);
     var elSavedMemes = document.querySelector('.saved-memes-container');
+    elSavedMemes.innerHTML = '';
     if (!memes) elSavedMemes.innerHTML = '<h1>There are no saved Memes</h1>';
     else {
         memes.map((meme) => {

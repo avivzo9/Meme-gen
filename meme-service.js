@@ -214,10 +214,15 @@ function switchLine() {
     }
 }
 
-function saveAndRestore() { ///////////////////////////////////////////////
+function saveAndRestore() {
     cleanBlur();
     var canvas = gElCanvas.toDataURL();
-    gSavedMemes.push(canvas);
+    gSavedMemes = loadFromStorage(MEMES_KEY);
+    if (gSavedMemes === null) {
+        gSavedMemes = [canvas]
+    } else {
+        gSavedMemes.push(canvas);
+    }
     _SaveMemesToStorage();
 }
 
@@ -285,4 +290,19 @@ function searchByWord(word) {
 function cleanBlur() {
     gMeme.lines[gLine].shadowBlur = 0;
     renderCanvas();
+}
+
+function getGCtx() {
+    return gCtx;
+}
+
+function clearCanvas() {
+    gCount = 0;
+    gLine = 0;
+    gMeme.lines[0].shadowBlur = 15;
+    gMeme.lines[1].shadowBlur = 0;
+    gMeme.lines[2].shadowBlur = 0;
+    gMeme.lines[0].txt = 'Type something';
+    gMeme.lines[1].txt = 'Type another thing';
+    gMeme.lines[2].txt = 'Type another thing';
 }
