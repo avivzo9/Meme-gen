@@ -34,7 +34,7 @@ function onLoadPng(img) {
 
 function onChangeText(ev) {
     ev.preventDefault();
-    var elText = document.querySelector('input[name="txt"]');
+    var elText = document.querySelector('input[name=txt]');
     changeText(elText.value);
     renderCanvas();
 }
@@ -147,18 +147,8 @@ function onTxtBorderColorChange() {
     renderCanvas();
 }
 
-function onLeftAlign() {
-    alignLeft();
-    renderCanvas();
-}
-
-function onRightAlign() {
-    alignRight();
-    renderCanvas();
-}
-
-function onCenterAlign() {
-    alignCenter();
+function onAlignText(idx) {
+    alignText(idx);
     renderCanvas();
 }
 

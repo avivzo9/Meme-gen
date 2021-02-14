@@ -47,7 +47,7 @@ var gMeme = {
     selectedLineIdx: gImgs[gCurrMemeId].lines,
     lines: [{
             txt: 'Type something',
-            size: 50,
+            size: 40,
             align: 'center',
             x: 270,
             y: 65,
@@ -58,7 +58,7 @@ var gMeme = {
         },
         {
             txt: 'Type another thing',
-            size: 50,
+            size: 40,
             align: 'center',
             x: 270,
             y: 505,
@@ -69,7 +69,7 @@ var gMeme = {
         },
         {
             txt: 'Type another thing',
-            size: 50,
+            size: 40,
             align: 'center',
             x: 270,
             y: gElCanvas.height / 2,
@@ -107,6 +107,7 @@ function drawText(imgIdx) {
     gCtx.strokeStyle = gMeme.lines[0].borderColor;
     gCtx.font = `${gMeme.lines[0].size}px ${gMeme.lines[0].font}`;
     gCtx.textAlign = gMeme.lines[0].align;
+    gCtx.measureText(gMeme.lines[0].txt);
     gCtx.fillText(gMeme.lines[0].txt, gMeme.lines[0].x, gMeme.lines[0].y);
     gCtx.strokeText(gMeme.lines[0].txt, gMeme.lines[0].x, gMeme.lines[0].y);
     if (gMeme.selectedLineIdx > 1) drawSecondText();
@@ -263,21 +264,25 @@ function txtBorderColorChange(color) {
     gMeme.lines[gLine].borderColor = color;
 }
 
-function alignLeft() {
-    gMeme.lines[gLine].align = 'right';
-}
-
-function alignRight() {
-    gMeme.lines[gLine].align = 'left';
-}
-
-function alignCenter() {
-    gMeme.lines[gLine].align = 'center';
+function alignText(idx) {
+    var txtWidth = gCtx.measureText(gMeme.lines[gLine].txt).width;
+    if (idx === 0) {
+        gMeme.lines[gLine].x = gElCanvas.width / 2;
+    } else if (idx === 1) {
+        gMeme.lines[gLine].x = 10 + (txtWidth / 2);
+    } else {
+        var right = (gElCanvas.width - (txtWidth / 2)) - 10;
+        gMeme.lines[gLine].x = right;
+    }
 }
 
 ////////////////////////////////////////////////////////////
 function getGCurrMemeId() {
     return gCurrMemeId;
+}
+
+function getGMeme() {
+    return gMeme;
 }
 
 function searchByWord(word) {

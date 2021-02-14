@@ -76,7 +76,6 @@
         width: 100%;
         color: white;
         font-size: 20px;
-        transition: 0.5s;
     }
     
     .nav-container>*:not(:first-child) {
@@ -490,11 +489,11 @@
             height: 100vh;
             background-color: #292929;
             box-shadow: 10px 10px 10px 10px #ababab;
-            transition: opacity .5s;
+            transform: translateX(0);
+            transition: opacity .5s, translateX .8s;
             width: 200px;
             justify-content: start;
             visibility: hidden;
-            transition: 0.3s;
         }
         .nav-container>* {
             border-bottom: 7px solid rgb(188 114 29);
