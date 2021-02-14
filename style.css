@@ -519,7 +519,6 @@
         .menu {
             display: inline-block;
         }
-        .footer-container {}
     }
     /* media editor */
     
@@ -546,7 +545,6 @@
             gap: 1px;
             justify-content: end;
         }
-        .footer-container {}
         .editor {
             flex-direction: row;
         }
@@ -604,6 +602,3 @@
             display: inline-block;
         }
     }
-    /* saved memes media */
-    
-    @media (max-width: 750px) {}
